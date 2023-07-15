@@ -20,6 +20,7 @@ struct WeatherView: View {
                         .fontWeight(.light)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
                 
                 Spacer()
 
@@ -39,51 +40,50 @@ struct WeatherView: View {
                             .fontWeight(.bold)
                             .padding()
                     }
+
                     Spacer()
 
                     AsyncImage(url: URL(string: "https://i.pinimg.com/originals/f5/d5/33/f5d533f4dcda831716ee971fca70b66d.png")) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 500)
+                            .frame(width: 300)
                             .colorInvert()
                     } placeholder: {
                         LoadingView()
                     }
-
-                    Spacer()
                 }
                 .frame(maxWidth: .infinity)
-            }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            VStack {
-                Spacer()
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Weather now")
-                        .bold()
-                        .padding(.bottom)
-
-                    HStack {
-                        WeatherRow(logo: "thermometer", name: "Min temp", value: weather.main.tempMin.roundDouble() + "º")
-                        Spacer()
-                        WeatherRow(logo: "thermometer", name: "Max temp", value: weather.main.tempMax.roundDouble() + "º")
-                    }
-
-                    HStack {
-                        WeatherRow(logo: "wind", name: "Wind speed", value: weather.wind.speed.roundDouble() + "m/s")
-                        Spacer()
-                        WeatherRow(logo: "humidity", name: "Humidity", value: weather.main.humidity.roundDouble() + "%")
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .padding(.bottom, 20)
-                .foregroundColor(Color("Teal"))
-                .background(Color("Orange"))
-                .cornerRadius(20, corners: [.topLeft, .topRight])
+
+                VStack {
+                    Spacer()
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Weather now")
+                            .bold()
+                            .padding(.bottom)
+
+                        HStack {
+                            WeatherRow(logo: "thermometer", name: "Min temp", value: weather.main.tempMin.roundDouble() + "º")
+                            Spacer()
+                            WeatherRow(logo: "thermometer", name: "Max temp", value: weather.main.tempMax.roundDouble() + "º")
+                        }
+
+                        HStack {
+                            WeatherRow(logo: "wind", name: "Wind speed", value: weather.wind.speed.roundDouble() + "m/s")
+                            Spacer()
+                            WeatherRow(logo: "humidity", name: "Humidity", value: weather.main.humidity.roundDouble() + "%")
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .padding(.bottom, 20)
+                    .foregroundColor(Color("Teal"))
+                    .background(Color("Orange"))
+                    .cornerRadius(20, corners: [.topLeft, .topRight])
+                }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(Color("Teal"))
